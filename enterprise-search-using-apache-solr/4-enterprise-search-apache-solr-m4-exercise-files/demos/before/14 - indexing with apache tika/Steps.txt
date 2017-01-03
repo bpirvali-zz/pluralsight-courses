@@ -1,0 +1,1 @@
+curl "http://localhost:8983/solr/apache-tika/update/extract?literal.id=doc1&commit=true" -F "myfile=@/Users/behzad.pirvali/Dropbox/Training/Storm-Training/Storm-Deep-Dive-2.pptx"

@@ -1,0 +1,22 @@
+Steps 
+
+Download nutch, unzip and move to c:\pluralsight-nutch
+
+Install  Cygwin (functionality similar to Linux on Windows)
+
+Set NUTCH_JAVA_HOME  to the same location as JAVA_HOME and use quotes for full path or else cygwin won't find them
+"C:\Program Files (x86)\Java\jdk1.6.0_37" to "C:\PROGRA~2\Java\JDK16~1.0_3"
+
+Open nutch-site.xml in C:\pluralsight-nutch\conf and add the lines included in the after folder
+
+Create seed.txt within urls folder and add list of web sites. In our case only http://www.pluralsight.com
+
+Download the following patch and apply
+https://github.com/congainc/patch-hadoop_7682-1.0.x-win/downloads
+
+Change in regex-urlfilter.txt
++^http://www.pluralsight.com/(.+)*$
+
+Open cygwin
+From cygwin in /cygdrive/c/pluralsight-nutch/
+$ bin/crawl urls/seed.txt TestCrawl http://localhost:8983/solr/psnutch 3

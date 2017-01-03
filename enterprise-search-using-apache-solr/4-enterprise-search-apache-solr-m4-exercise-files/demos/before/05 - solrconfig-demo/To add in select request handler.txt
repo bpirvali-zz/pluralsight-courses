@@ -1,0 +1,5 @@
+	<str name="wt">xml</str>
+       	<str name="indent">true</str>
+
+	<str name="facet">on</str>
+       	<str name="facet.field">course-author</str>

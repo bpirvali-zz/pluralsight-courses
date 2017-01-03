@@ -1,0 +1,1 @@
+java -Durl=http://localhost:8983/solr/psdemo/update  -Dtype=text/csv -jar post.jar "Two sample courses with author test.csv"

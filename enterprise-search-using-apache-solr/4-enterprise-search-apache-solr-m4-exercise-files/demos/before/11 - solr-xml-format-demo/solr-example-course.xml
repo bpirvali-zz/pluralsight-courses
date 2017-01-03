@@ -1,0 +1,15 @@
+:q:<!--
+Getting Started with Enterprise Search using Apache Solr
+ Test upload Solr XML
+-->
+<add>
+	<doc>
+		  <field name="courseid">getting-started-enterprise-search-apache-solr</field>
+		  <field name="coursetitle">Getting Started with Enterprise Search using Apache Solr</field>
+		  <field name="durationinseconds">8849</field>		  
+		  <field name="releasedate">2014-05-14T00:00:00Z</field>
+		  <field name="description">Search is one of the most misunderstood functionalities in the IT industry. Even further, Enterprise Search used to be not for the faint of heart or with a thin wallet. However, since the introduction of Apache Solr the name of the game has changed. Apache Solr brings high quality Enterprise Search to the masses. Do not leave home without it!</field>
+		  <field name="assessmentstatus">Live</field>
+		  <field name="iscourseretired">no</field>  
+	</doc>
+</add>

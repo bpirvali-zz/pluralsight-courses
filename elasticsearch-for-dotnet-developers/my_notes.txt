@@ -1,0 +1,224 @@
+<!--=================================
+== BP:2017-01-03 00:11 PST
+== my elastic search notes 
+==================================-->
+PUT /my_blog
+{
+  "mappings": {
+    "post": {
+      "properties": {
+        "user_id": {
+          "type": "integer"
+        },
+        "post_text": {
+          "type": "string"
+        },
+        "post_date": {
+          "type": "date"
+        }
+      }
+    }
+  }
+}
+-->
+{
+  "acknowledged": true,
+  "shards_acknowledged": true
+}
+
+
+GET _cat/indices
+-->
+yellow open my_blog                         aWIwkQm-TZK2n2x1hGWmHg 5 1    0   0    650b    650b
+
+GET my_blog/_mapping
+-->
+{
+  "my_blog": {
+    "mappings": {
+      "post": {
+        "properties": {
+          "post_date": {
+            "type": "date"
+          },
+          "post_text": {
+            "type": "text"
+          },
+          "user_id": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}
+
+DELETE my_blog
+-->
+{
+  "acknowledged": true,
+}
+
+POST /my_blog/post
+{
+  "post_date": "2015-08-27",
+  "post_text": "This is another real blog post!",
+  "user_id": 3
+}
+-->
+{
+  "_index": "my_blog",
+  "_type": "post",
+  "_id": "AVljl3ZFEmBd3vLUQ1VF",
+  "_version": 1,
+  "result": "created",
+  "_shards": {
+    "total": 2,
+    "successful": 1,
+    "failed": 0
+  },
+  "created": true
+}
+
+GET /my_blog/post/_search
+-->
+{
+  "took": 1,
+  "timed_out": false,
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "failed": 0
+  },
+  "hits": {
+    "total": 3,
+    "max_score": 1,
+    "hits": [
+      {
+        "_index": "my_blog",
+        "_type": "post",
+        "_id": "AVljlQllEmBd3vLUQ1Rl",
+        "_score": 1,
+        "_source": {
+          "post_date": "2015-08-20",
+          "post_text": "This is a real blog post!",
+          "user_id": 1
+        }
+      },
+      {
+        "_index": "my_blog",
+        "_type": "post",
+        "_id": "AVljllfJEmBd3vLUQ1Tk",
+        "_score": 1,
+        "_source": {
+          "post_date": "2015-08-25",
+          "post_text": "This is another real blog post!",
+          "user_id": 2
+        }
+      },
+      {
+        "_index": "my_blog",
+        "_type": "post",
+        "_id": "AVljl3ZFEmBd3vLUQ1VF",
+        "_score": 1,
+        "_source": {
+          "post_date": "2015-08-27",
+          "post_text": "This is another real blog post!",
+          "user_id": 3
+        }
+      }
+    ]
+  }
+}
+
+GET /my_blog/post/AVljllfJEmBd3vLUQ1Tk
+-->
+{
+  "_index": "my_blog",
+  "_type": "post",
+  "_id": "AVljllfJEmBd3vLUQ1Tk",
+  "_version": 1,
+  "found": true,
+  "_source": {
+    "post_date": "2015-08-25",
+    "post_text": "This is another real blog post!",
+    "user_id": 2
+  }
+}
+
+
+GET /my_blog/_search
+{
+  "query": {
+    "terms": {
+      "_id": [ "1", "AVljllfJEmBd3vLUQ1Tk" ] 
+    }
+  }
+}
+-->
+{
+  "took": 4,
+  "timed_out": false,
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "failed": 0
+  },
+  "hits": {
+    "total": 2,
+    "max_score": 1,
+    "hits": [
+      {
+        "_index": "my_blog",
+        "_type": "post",
+        "_id": "AVljllfJEmBd3vLUQ1Tk",
+        "_score": 1,
+        "_source": {
+          "post_date": "2015-08-25",
+          "post_text": "This is another real blog post!",
+          "user_id": 2
+        }
+      },
+      {
+        "_index": "my_blog",
+        "_type": "post",
+        "_id": "1",
+        "_score": 1,
+        "_source": {
+          "post_date": "2016-08-27",
+          "post_text": "This is another real blog post!",
+          "user_id": 3
+        }
+      }
+    ]
+  }
+}
+
+PUT /my_blog
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 5
+    }
+  },
+  "mappings": {
+    "post": {
+      "properties": {
+        "user_id": {
+          "type": "integer"
+        },
+        "post_text": {
+          "type": "string"
+        },
+        "post_date": {
+          "type": "date",
+          "format": "YYYY-MM-DD"
+        }
+      }
+    }
+  }
+}
+
+<!--=================================
+== /my elastic search notes
+==================================-->

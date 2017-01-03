@@ -1,0 +1,14 @@
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\Elasticsearch.Net.dll
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\Nest.dll
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\Elasticsearch.Net.pdb
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\Elasticsearch.Net.xml
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\Nest.pdb
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\Nest.xml
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\Users\jtoto\projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb

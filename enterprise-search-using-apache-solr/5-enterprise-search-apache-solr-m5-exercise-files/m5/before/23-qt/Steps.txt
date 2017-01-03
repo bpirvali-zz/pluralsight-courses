@@ -1,0 +1,15 @@
+We will create a new request handler by coyping /select and renaming to /pluralsight
+
+
+Add in appends
+ <lst name="appends">
+        <str name="fq">iscourseretired:no</str>
+	<str name="facet.field">course-author</str>
+        <str name="facet.field">releasedate</str>
+        <str name="facet.query">durationinseconds:[* TO 9999]</str>
+	<str name="facet.query">durationinseconds:[10000 TO 19999]</str>
+	<str name="facet.query">durationinseconds:[20000 TO 29999]</str>
+	<str name="facet.query">durationinseconds:[30000 TO 39999]</str>
+	<str name="facet.query">durationinseconds:[40000 TO 49999]</str>
+	<str name="facet.query">durationinseconds:[50000 TO *]</str>
+</lst>

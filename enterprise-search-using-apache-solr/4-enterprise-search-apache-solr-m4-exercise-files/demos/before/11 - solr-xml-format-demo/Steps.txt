@@ -1,0 +1,6 @@
+Copy solr-example-course.xml into example docs and run
+
+java -Dauto -Durl="http://localhost:8983/solr/psdemo/update" -jar post.jar solr-example-course.xml
+
+Query for "solr" and retrieve the result
+

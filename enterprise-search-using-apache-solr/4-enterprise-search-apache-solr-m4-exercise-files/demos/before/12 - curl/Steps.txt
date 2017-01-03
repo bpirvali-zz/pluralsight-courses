@@ -1,0 +1,8 @@
+Add
+curl http://localhost:8983/solr/my_sample_core-3/update?commit=true -H "Content-Type: text/xml" --data-binary "<add><doc><field name=\"courseid\">getting-started-enterprise-search-apache-solr</field><field name=\"coursetitle\">Getting Started with Enterprise Search using Apache Solr</field></doc></add>"
+
+Update
+curl http://localhost:8983/solr/my_sample_core-3/update?commit=true -H "Content-Type: text/json" --data-binary "{\"add\":{ \"doc\":{\"courseid\":\"getting-started-enterprise-search-apache-solr\",\"coursetitle\":{\"set\":\"Updated using cURL and json\"}}}}"
+
+Delete
+curl http://localhost:8983/solr/my_sample_core-3/update?commit=true -H "Content-Type: text/xml" --data-binary "<delete><query>courseid:getting-started-enterprise-search-apache-solr</query></delete>"

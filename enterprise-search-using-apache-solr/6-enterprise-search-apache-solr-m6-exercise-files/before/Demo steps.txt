@@ -1,0 +1,108 @@
+Demo
+- Download Solrnet.
+- Extract.
+- Open SampleSolrApp.sln and build. Fails... Close.
+- Open SolrNet.sln and build. Wait... 18 succeeded. Close.
+- Open SampleSolrApp again.
+- From references, delete SolrNet and add again from \SolrNet\bin\Debug
+- Build. Fails again because no reference to DSL. Show the error.
+- Add reference from \SolrNet.DSL\bin\Debug
+- Rebuild All: 2 succeeded
+- Rename to PluralsightSampleSolrApp
+- Now run and ignore the error for the favicon
+- Megastore starts and has sample data! BTW: do not close the pages in your browser every time that you run the demo. It will show you your progress later.
+- Change to use the appropriate core, by changing <add key="solrUrl" value="http://localhost:8983/solr/psdemo" />
+- Start and you will get an exception
+- Add common language exception check, start again
+- Look in the stack trace and get to the AddInitialDocuments. Comment it out in Application_Start as we have our own collection and we don't need to create sample data
+- Run again, open the exception, go to inner detail and show the problem, undefined fields
+- Go to /models/product.cs. Solrnet uses POCO to define our documents, so we need to make it match what we have in the schema.
+- Go to schema.xml, copy what you have available for the document. Can be done also from http://localhost:8983/solr/#/psdemo/files?file=schema.xml. This is what you will find there:
+
+    <field name="courseid" type="string" indexed="true" stored="true" required="true" multiValued="false" />     
+	<field name="coursetitle" type="string" indexed="true" stored="true" multiValued="false"/>	 
+	<field name="coursetitlesearch" type="text_general" indexed="true" stored="true" multiValued="false"/>	
+	<field name="durationinseconds" type="int" indexed="true" stored="true" /> 	
+	<field name="releasedate" type="date" indexed="true" stored="true"/>
+	<field name="description" type="text_general" indexed="true" stored="true"/>	
+	<field name="assessmentstatus" type="string" indexed="true" stored="true"/>	
+	<field name="iscourseretired" type="string" indexed="true" stored="true"/>	
+	<field name="tag" type="string" multiValued="true" indexed="true" stored="true"/>	
+	<field name="course-author" type="string" multiValued="true" indexed="true" stored="true" />
+	
+- Modify Product.cs to reflect the schema. It should look like this:
+
+	[SolrUniqueKey("courseid")]        
+	public string CourseId { get; set; }
+	[SolrField("coursetitle")]
+	public string CourseTitle { get; set; }
+	[SolrField("coursetitlesearch")]
+	public string CourseTitleSearch { get; set; }
+	[SolrField("durationinseconds")]      
+	public int DurationInSeconds { get; set; }
+	[SolrField("releasedate")]
+	public DateTime ReleaseDate { get; set; }
+	[SolrField("description")]
+	public string Description { get; set; }
+	[SolrField("assessmentstatus")]
+	public string AssessmentStatus { get; set; }
+	[SolrField("iscourseretired")]
+	public string IsCourseRetired { get; set; }
+	[SolrField("tag")]      
+	public ICollection<string> Tag { get; set; }
+	[SolrField("course-author")]       
+	public ICollection<string> CourseAuthor { get; set; }
+
+- Go to the SolrConnectionException and get the Url, it should be something like the url below. Scroll down and you will see the error. 
+http://localhost:8983/solr/psdemo/select?q=*:*&start=0&rows=5&facet=true&facet.field=cat&f.cat.facet.mincount=1&facet.field=manu_exact&f.manu_exact.facet.mincount=1&spellcheck=true&version=2.2
+
+- Look for "cat" and change the facet fields in HomeController.cs. It should look like:
+private static readonly string[] AllFacetFields = new[] {"course-author", "releasedate"};
+
+- Run again, ignore errors. You will get now an MVC binding error. This is because we are already in the UI! 
+
+- Go to /Views/Home/Index.aspx. And here you really need to know MVC, which is another training. Change
+  	p.name => CourseTitle
+  	Price => Author
+	p.Price.ToString("C") => p.CourseAuthor
+	Categories => Tags
+	p.Categories, cat => p.Tag, tag 
+	Url.SetFacet("cat", cat) => Url.SetFacet("tag", tag)
+	=cat => = tag
+
+- Run. Looks good except author. Because it is multivalue.
+p.CourseAuthor => p.CourseAuthor.First().ToString()
+
+- Go to /Shared/Site.Master and change MegaStore to Pluralsight. Run.
+
+- Add hyperlink, just for fun!
+<a href="<%= "http://pluralsight.com/training/Courses/TableOfContents/" + p.CourseId%> target="_blank">View course</a><br />
+
+- Add Duration 
+  - Duration: <%= p.DurationInSeconds; %>
+
+- Show what are other possible improvements. For example modify the facets returned values, select correct fields on sorting and more! Enjoy SolrNet!
+
+- To make it look nice
+> remove reference to site.css in site.master
+> add clearfix as class in site.master
+<body>
+    <div class="page clearfix">
+
+> add in head
+<script type="text/javascript" src="//use.typekit.net/tjq0dsz.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+> Add after div header in site.master
+<div id="header">
+		<div class="subheader">Results</div>
+		
+> just before closing
+<footer> </footer>
+
+> In index.aspx add a div before form and close after
+<div class="search">
+<form...../>
+</div>
+
+- Copy folder ps in before to /Content/ in Sample SolrApp

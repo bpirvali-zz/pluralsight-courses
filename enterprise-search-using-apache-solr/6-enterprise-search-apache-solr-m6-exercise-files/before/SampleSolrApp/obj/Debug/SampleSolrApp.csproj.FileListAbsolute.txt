@@ -1,0 +1,1 @@
+C:\Users\xavier\Downloads\SolrNet-master-original\SampleSolrApp\obj\Debug\SampleSolrApp.csprojResolveAssemblyReference.cache

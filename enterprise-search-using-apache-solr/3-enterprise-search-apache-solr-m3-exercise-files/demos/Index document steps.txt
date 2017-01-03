@@ -1,0 +1,2 @@
+In exampledocs run this from the command line
+java -jar post.jar *.xml

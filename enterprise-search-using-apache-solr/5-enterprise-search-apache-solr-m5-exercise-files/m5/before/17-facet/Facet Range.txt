@@ -1,0 +1,7 @@
+Add this to the query parameters
+facet.range=durationinseconds&f.durationinseconds.facet.range.start=0&f.durationinseconds.facet.range.end=140000&f.durationinseconds.facet.range.gap=1000
+
+Add course-author as facet.field
+
+This should be the resulting URL
+http://localhost:8983/solr/my_sample_core-3/select?q=*%3A*&wt=xml&indent=true&facet=true&facet.field=tag&facet.field=course-author&facet.range=durationinseconds&f.durationinseconds.facet.range.start=0&f.durationinseconds.facet.range.end=140000&f.durationinseconds.facet.range.gap=1000

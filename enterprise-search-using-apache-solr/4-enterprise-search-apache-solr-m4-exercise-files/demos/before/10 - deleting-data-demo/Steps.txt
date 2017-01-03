@@ -1,0 +1,5 @@
+Run this to delete 1
+http://localhost:8983/solr/psdemo/update?stream.body=<delete><query>courseid:scrum-development-jira-agile</query></delete>&commit=true
+
+Run this to delete the entire index
+http://localhost:8983/solr/psdemo/update?stream.body=<delete><query>*:*</query></delete>&commit=true
