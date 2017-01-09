@@ -1,0 +1,32 @@
+def contentSpec = copySpec {
+  //exclude 'IMG_0052.JPG', 'IMG_0054.JPG'
+
+  exclude {it.file.name.startsWith('IMG')}
+  
+  from 'src'
+}
+
+task copyImages2 (type: Copy) {
+  with contentSpec
+  into 'dest'
+}
+
+task copyImages (type: Copy){
+  exclude 'IMG_0052.JPG', 'IMG_0054.JPG'
+  from 'src'
+  into 'dest'
+}
+
+task copyConfig (type: Copy) {
+  include 'web.xml'
+  from 'src'
+  into 'config'
+  expand (
+    [resourceRefName: 'jdbc/JacketDB']
+  )
+}
+
+
+
+
+

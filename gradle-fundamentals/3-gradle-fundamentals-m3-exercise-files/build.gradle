@@ -1,0 +1,33 @@
+task taskA << {println "task A"}
+task taskB << {println "task B"}
+task taskC << {println "task C"}
+task taskD << {println "task D"}
+task taskE << {println "task E"}
+task taskF << {println "task F"}
+
+taskA.dependsOn taskB
+taskA.dependsOn taskD, taskC
+
+taskC.dependsOn taskE
+taskD.dependsOn taskE
+
+taskA.dependsOn taskE
+
+task taskG {
+  dependsOn taskE
+  doLast {
+    println "task G"
+  }
+}
+
+taskA.dependsOn taskG
+
+taskB.mustRunAfter taskC
+taskB.shouldRunAfter taskB
+
+taskE.finalizedBy taskF
+
+task task1 << {println "task 1"}
+task task2 << {println "task 2"}
+
+task2.mustRunAfter task1

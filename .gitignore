@@ -29,4 +29,5 @@ nbdist/
 gradle/
 gradlew
 gradlew.bat
-
+*.zip
+tmp/
